@@ -53,8 +53,9 @@
         channelName = channelName + (channel ? channel.name : 'UNKNOWN_CHANNEL');
         var userName = (user != null ? user.name : void 0) != null ? "@" + user.name : "UNKNOWN_USER";
         if (type === 'message' && (text != null) && shouldMessageBeRead(userName, channelName)) {
-            console.log("Announce on " + channelName + ": \"" + text + "\"");
-            return say.speak(null, text);
+            var result = ((config.sayWhoSpeaks) ? 'From ' + user.name + ': ' : '') + config.prefix + ' ' + text;
+            console.log("Announce on " + channelName + ": \"" + result + "\"");
+            return say.speak(null, result);
         } else {
             if (!shouldMessageBeRead(userName, channelName)) return;
             var typeError = type !== 'message' ? "unexpected type " + type + "." : null;
